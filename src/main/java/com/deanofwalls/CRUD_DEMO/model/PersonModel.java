@@ -63,7 +63,7 @@ public class PersonModel {
     }
 
     public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = this.birthDate;
+        this.birthDate = birthDate;
     }
 
 }
