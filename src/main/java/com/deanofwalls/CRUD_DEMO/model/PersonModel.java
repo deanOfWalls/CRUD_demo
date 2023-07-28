@@ -1,28 +1,33 @@
 package com.deanofwalls.CRUD_DEMO.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 
+//import java.util.Date;
 import java.time.LocalDate;
-import java.util.Date;
+
+//import org.springframework.web.bind.annotation.*;
 
 
 //designates as persistent class, maps Entity to table with same name of annotated class
 //can be rerouted using @Table annotation. Entities are fungible.
 //Each Entity MUST be annotated with a respective ID
 @Entity
-public class Model {
+public class PersonModel {
     @Id //Denotes primary key for this Entity (can be auto-generated or generated manually by app)
     @GeneratedValue(strategy = GenerationType.IDENTITY) //annotates Id fields, 'IDENTITY' uses Id column
     private Long id;
     private String firstName;
     private String lastName;
-    private Date birthDate;
+    @JsonFormat(pattern = "yyyy-MM-dd") //i added this notation to try to change the format
+    private LocalDate birthDate; //I think the format is: yyyy-MM-ddTHH:mm:ss
 
-    public Model() {
+    public PersonModel() {
 
     }
 
-    public Model(Long id, String firstName, String lastName, Date birthDate) {
+    public PersonModel(Long id, String firstName, String lastName, LocalDate birthDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -53,12 +58,12 @@ public class Model {
         this.lastName = lastName;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate() {
-        this.birthDate = birthDate;
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = this.birthDate;
     }
 
 }
