@@ -1,5 +1,5 @@
 # Use an image with Java 17
-FROM adoptopenjdk:17-jdk-hotspot as build
+FROM openjdk:8-jdk-alpine as build
 WORKDIR /workspace/app
 COPY mvnw .
 COPY .mvn .mvn
