@@ -1,29 +1,35 @@
-<script
-        src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-        crossorigin="anonymous">
+<!DOCTYPE html>
+<html>
 
-</script>
+<head>
+    <title>Dean's Basic CRUD Demo Application</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+    </script>
+    <script src="service.js"></script>
+</head>
 
-<script src="service.js"></script>
-<style>
-    body {
-    background-color: #808080;
-    }
-</style>
+<body>
+<div class="header">
+    <h1>DEAN'S BIG BOY CRUD APP</h1>
+    </div>
+<div class="form-container">
+    <form>
+        <input id="person-id" onclick="highlightAll(event)" placeholder="ID"><br>
+        <input id="first-name" placeholder="First Name"><br>
+        <input id="last-name" placeholder="Last Name"><br>
+        <input id="birth-date" placeholder="Birthdate YYYY-MM-DD"><br>
+        <button onClick="create(event)">Create</button>
+        <button onClick="readById(event)">Read</button>
+        <button onClick="readAll(event)">Read All</button>
+        <button onClick="update(event)">Update</button>
+        <button onClick="deleteThing(event)">Delete</button>
+    </form>
 
+    <!-- textarea to display json data instead of using popup -->
+    <textarea id="json-display" rows="20" readonly></textarea>
 
-<form>
-    <input id="person-id"> - ID<br>
-    <input id="first-name"> - FirstName<br>
-    <input id="last-name"> - LastName<br>
-    <input id="birth-date"> - BirthDate<br>
-    <button onClick="create(event)">Create</button>
-    <button onClick="readById(event)">Read</button>
-    <button onClick="readAll(event)">Read All</button>
-    <button onClick="update(event)">Update</button>
-    <button onClick="deleteThing(event)">Delete</button>
-</form>
-
-
-
+</div>
+</body>
+</html>
