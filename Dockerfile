@@ -9,8 +9,8 @@ RUN chmod +x ./mvnw
 RUN ./mvnw install -DskipTests
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
-# Use Java 17 as the base image for the final stage
-FROM adoptopenjdk:17-jdk-hotspot
+# Use Java 17 as the base image for the final stage (reverted to 8, 17 may not be supported)
+FROM openjdk:8-jdk-alpine as build
 VOLUME /tmp
 ARG DEPENDENCY=/workspace/app/target/dependency
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
