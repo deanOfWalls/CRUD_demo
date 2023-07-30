@@ -27,9 +27,12 @@ function create(event) {
     const birthDateValue = birthDateElement.value;
     const person = new Person(personIdValue, firstNameValue, lastNameValue, birthDateValue);
 
-    //call the create function of the spring boot app with the values
-    const personData = JSON.stringify(person);
-    console.log(personData);
+    const personData = JSON.stringify({
+        id: personIdValue,
+        firstName: firstNameValue,
+        lastName: lastNameValue,
+        birthDate: birthDateValue,
+    });
 
     $.ajax({
         type: "POST",
@@ -43,8 +46,11 @@ function create(event) {
         data: personData,
         dataType: "JSON",
         success: function (response) {
-            alert(JSON.stringify(response));
+            updateJsonDisplay(response); // Display the JSON data in the textarea after the request is successful
         },
+        error: function (error) {
+            alert("An error occurred during the create request.");
+        }
     });
 }
 
