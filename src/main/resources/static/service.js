@@ -49,7 +49,7 @@ function create(event) {
             updateJsonDisplay(response); // Display the JSON data in the textarea after the request is successful
         },
         error: function (error) {
-            alert("An error occurred during the create request.");
+            updateJsonDisplay("An error occurred during the create request.");
         }
     });
 }
@@ -72,7 +72,7 @@ async function readAll(event) {
         // Display the JSON data in the textarea
         updateJsonDisplay(response);
     } catch (error) {
-        alert("An error occurred during the readAll request.");
+        updateJsonDisplay("An error occurred during the readAll request.");
     }
 }
 
@@ -96,7 +96,7 @@ async function readById(event) {
         // Display the JSON data in the textarea instead of using stringify popup
         updateJsonDisplay(response);
     } catch (error) {
-        alert("An error occurred during the readById request.");
+        updateJsonDisplay("An error occurred during the readById request.");
     }
 }
 
@@ -144,7 +144,7 @@ async function update(event) {
         updateJsonDisplay(response);
     } catch (error) {
         console.error("Update Error:", error);
-        alert("An error occurred during the update request.");
+        updateJsonDisplay("An error occurred during the update request.");
     }
 }
 
@@ -169,7 +169,7 @@ async function deleteThing(event) {
         // Display the JSON data in the textarea instead of using stringify popup
         updateJsonDisplay(response);
     } catch (error) {
-        alert("An error occurred during the deleteThing request.");
+        updateJsonDisplay("An error occurred during the deleteThing request.");
     }
 }
 
