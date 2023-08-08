@@ -19,4 +19,5 @@ while true; do
   # Wait 30 seconds to send the next request
   sleep 30
 
-  echo "Ending iteration at
+  echo "Ending iteration at $(date)" # Debug message
+done
