@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Start the Java application in the background
 java -cp app:app/lib/* com.deanofwalls.CRUD_DEMO.MainApplication &

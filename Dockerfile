@@ -31,4 +31,4 @@ COPY simplePinger.sh /simplePinger.sh
 RUN chmod +x /simplePinger.sh
 
 # Entry Point for Starting Both Applications
-ENTRYPOINT ["/simplePinger.sh"]
+ENTRYPOINT ["sh", "/simplePinger.sh"]
