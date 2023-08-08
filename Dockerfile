@@ -25,4 +25,4 @@ COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 
 # Entry Point for Starting Both Applications
-ENTRYPOINT ["sh", "-c", "java -cp app:app/lib/* com.deanofwalls.CRUD_DEMO.MainApplication & while true; do sleep 30; curl -s http://127.0.0.1:8080/readAll >/dev/null; done"]
+ENTRYPOINT ["sh", "-c", "java -cp app:app/lib/* com.deanofwalls.CRUD_DEMO.MainApplication & while true; do echo \"Starting a new iteration at $(date)\"; http_code=$(curl -s -o /dev/null -w \"%{http_code}\" http://127.0.0.1:8080/readAll); echo \"HTTP Status Code for http://127.0.0.1:8080/readAll: $http_code\"; sleep 30; done"]
