@@ -31,4 +31,4 @@ COPY simplePinger.sh /simplePinger.sh
 RUN chmod +x /simplePinger.sh
 
 # Entry Point for Starting Both Applications
-ENTRYPOINT ["sh", "-c", "java -cp app:app/lib/* com.deanofwalls.CRUD_DEMO.MainApplication & /simplePinger.sh"]
+ENTRYPOINT ["sh", "-c", "java -cp app:app/lib/* com.deanofwalls.CRUD_DEMO.MainApplication & while true; do sleep 30; curl -s http://127.0.0.1:8080/readAll >/dev/null; done"]
