@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Start the Java application in the background
+java -cp app:app/lib/* com.deanofwalls.CRUD_DEMO.MainApplication &
+
 # Define the endpoint URL of your CRUD app
 endpoint_url="http://127.0.0.1:8080/readAll" # Change this to your actual endpoint
 

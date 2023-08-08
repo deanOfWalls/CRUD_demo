@@ -31,4 +31,4 @@ COPY simplePinger.sh /simplePinger.sh
 RUN chmod +x /simplePinger.sh
 
 # Entry Point for Starting Both Applications
-ENTRYPOINT ["sh", "-c", "java -cp app:app/lib/* com.deanofwalls.CRUD_DEMO.MainApplication & /simplePinger.sh"]
+ENTRYPOINT ["/simplePinger.sh"]
