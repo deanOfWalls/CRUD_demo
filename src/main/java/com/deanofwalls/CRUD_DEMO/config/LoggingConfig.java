@@ -1,4 +1,4 @@
-package com.deanofwalls.CRUD_DEMO.config;
+package com.deanofwalls.CRUD_SQL_DEMO.config;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
