@@ -1,5 +1,3 @@
-# https://dev.to/lucasleon/heroku-is-not-free-anymore-so-ill-teach-you-how-to-deploy-your-spring-boot-services-to-rendercom-with-maven-and-docker-aca
-
 # Build Stage
 FROM openjdk:8-jdk-alpine as build
 WORKDIR /workspace/app
@@ -32,8 +30,5 @@ COPY simplePinger.sh /simplePinger.sh
 # Make the Bash script executable
 RUN chmod +x /simplePinger.sh
 
-# Entry Point for CRUD Application
-ENTRYPOINT ["java","-cp","app:app/lib/*","com.deanofwalls.CRUD_DEMO.MainApplication"]
-
-# Optionally, you can run the Bash script when the container starts
-# CMD ["/simplePinger.sh"]
+# Entry Point for Starting Both Applications
+ENTRYPOINT ["sh", "-c", "java -cp app:app/lib/* com.deanofwalls.CRUD_DEMO.MainApplication & /simplePinger.sh"]

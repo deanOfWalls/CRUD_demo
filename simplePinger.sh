@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the endpoint URL of your CRUD app
-endpoint_url="http://localhost:8080" # Change this to your actual endpoint
+endpoint_url="http://127.0.0.1:8080/readAll" # Change this to your actual endpoint
 
 # Debug: print the endpoint URL
 echo "Endpoint URL: $endpoint_url"
