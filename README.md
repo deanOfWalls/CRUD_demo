@@ -7,7 +7,7 @@ create new entries, edit, and delete entries in an H2 database. The application 
 jQuery, Thymeleaf, and H2. The Model-View-Controller (MVC) architectural pattern is used to separate concerns and
 improve maintainability.
 
-Please view the [Javadocs](add.after.making.page) for this project to get better acquainted with the object orientation.
+Please view the [Javadocs](https://deanofwalls.github.io/CRUD_demo/javadocs/index.html) for this project to get better acquainted with the object orientation.
 
 ## System Architecture
 
