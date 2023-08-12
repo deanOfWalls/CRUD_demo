@@ -4,34 +4,32 @@
 
 `CRUD_demo` is a web application designed to demonstrate basic CRUD functionality. It allows users to read all entries,
 create new entries, edit, and delete entries in an H2 database. The application is built using Java, Spring Boot,
-jQuery, Thymeleaf, and H2. The Model-View-Controller (MVC) architectural pattern is used to separate concerns and
+jQuery, and H2. The Model-View-Controller (MVC) architectural pattern is used to separate concerns and
 improve maintainability.
 
-Please view the [Javadocs](https://deanofwalls.github.io/CRUD_demo/javadocs/index.html) for this project to get better acquainted with the object orientation.
+Please view the [Javadocs](https://deanofwalls.github.io/CRUD_demo/javadocs/index.html) for this project to get better
+acquainted with the object orientation.
 
 ## System Architecture
 
-The `CRUD_demo` system follows a client-server architecture. The client-side of the application is built using jQuery
-and Thymeleaf, which handle the user interface and interaction. The server-side is implemented using Java and Spring
+The `CRUD_demo` system follows a client-server architecture. The client-side of the application is built using jQuery,
+which handles the user interface and interaction. The server-side is implemented using Java and Spring
 Boot, providing the business logic and data persistence layer. An H2 in-memory database is used for data storage and
 retrieval.
 
 ## Database Design
 
-The H2 database consists of a single table. The exact schema might vary based on your needs. For the sake of this
-example, let's assume a simplified schema:
+The H2 database consists of a single table representing individuals' basic details. The table schema is defined
+as follows:
 
-```sql
-CREATE TABLE entries (
+```
+CREATE TABLE individuals (
 ID INT PRIMARY KEY AUTO_INCREMENT,
-data_entry VARCHAR(255)
+firstName VARCHAR(255),
+lastName VARCHAR(255),
+birthDate DATE
 );
 ```
-
-The table includes the following columns:
-
-- ID: Unique identifier for each entry.
-- data_entry: Text data corresponding to the entry.
 
 ## System Components
 
@@ -81,6 +79,6 @@ application periodically.
 ## Conclusion
 
 The `CRUD_demo` web application is a simple and straightforward demonstration of CRUD operations using Java, Spring
-Boot, jQuery, Thymeleaf, and H2. It provides an easy-to-understand introduction to building and deploying CRUD
+Boot, jQuery, and H2. It provides an easy-to-understand introduction to building and deploying CRUD
 applications. Its containerized nature ensures consistent behavior across different environments, while its deployment
 on Render.com makes it easily accessible to users worldwide.
