@@ -12,6 +12,9 @@ RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 # Final Stage
 FROM openjdk:8-jdk-alpine
 
+# Update package lists and install curl
+RUN apk --no-cache add curl
+
 # Set up volumes and arguments
 VOLUME /tmp
 ARG DEPENDENCY=/workspace/app/target/dependency
@@ -21,5 +24,5 @@ COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 
-# Entry Point for Starting the Application
-ENTRYPOINT ["java", "-cp", "app:app/lib/*", "com.deanofwalls.CRUD_DEMO.MainApplication"]
+# Entry Point for Starting Both Applications
+ENTRYPOINT ["sh", "-c", "java -cp app:app/lib/* com.deanofwalls.CRUD_DEMO.MainApplication & while true; do echo \"Starting a new iteration at $(date)\"; http_code=$(curl -k -s -o /dev/null -w \"%{http_code}\" https://crud-demo-7igb.onrender.com/readAll); echo \"HTTP Status Code for https://crud-demo-7igb.onrender.com/readAll: $http_code\"; sleep 30; done"]
