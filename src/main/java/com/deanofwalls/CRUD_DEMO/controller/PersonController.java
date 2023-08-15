@@ -47,5 +47,10 @@ public class PersonController {
         return new ResponseEntity<>(service.deleteById(id), HttpStatus.OK);
     }
 
+    @GetMapping("/health-check")
+    public ResponseEntity<String>healthCheck(){
+        return ResponseEntity.ok("UP");
+    }
+
 
 }
