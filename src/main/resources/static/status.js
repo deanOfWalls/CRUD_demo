@@ -8,8 +8,11 @@ function checkAppStatus() {
         })
         .then(status => {
             if (status === 'UP') {
-                document.getElementById('loadingSection').style.display = 'none';
-                document.getElementById('mainAppSection').style.display = 'block';
+                // Introduce a 1-second delay before switching views
+                setTimeout(() => {
+                    document.getElementById('loadingSection').style.display = 'none';
+                    document.getElementById('mainAppSection').style.display = 'block';
+                }, 1000);
             } else {
                 setTimeout(checkAppStatus, 5000);
             }

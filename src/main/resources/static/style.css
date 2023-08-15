@@ -8,6 +8,19 @@
     position:relative;
 }
 
+#loadingSection {
+    background-color: #0046ff;
+    height: 100vh; /* to make it cover the whole viewport height */
+    color: #ffffff; /* setting the text color to white */
+}
+
+#loadingSection p {
+    font-size: 24px; /* adjust this value to your desired size */
+    font-weight: bold; /* making the text bold */
+}
+
+
+
 .form-container textarea{
     width: 100%;
     resize:vertical;
