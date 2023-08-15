@@ -8,35 +8,12 @@
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
     </script>
     <script src="service.js"></script>
-    <script>
-        function checkAppStatus() {
-            fetch('/health-check')
-                .then(response => {
-                    if (response.status === 200) {
-                        // App is up! Display the main section and hide the loading section
-                        document.getElementById('loadingSection').style.display = 'none';
-                        document.getElementById('mainAppSection').style.display = 'block';
-                    } else {
-                        // App is not ready yet. Wait and try again.
-                        setTimeout(checkAppStatus, 5000); // Check every 5 seconds
-                    }
-                })
-                .catch(error => {
-                    // Error occurred, possibly the app is not up yet. Wait and try again.
-                    setTimeout(checkAppStatus, 5000); // Check every 5 seconds
-                });
-        }
-
-        // Start the polling as soon as the page loads
-        window.onload = checkAppStatus;
-    </script>
 </head>
 
 <body>
 
 <!-- Loading Section -->
 <div id="loadingSection" style="text-align: center; padding-top: 50px;">
-    <!-- Display the loading gif -->
     <img src="loading.gif" alt="Loading...">
     <p>Please wait a moment while the app is spun up...</p>
 </div>
@@ -58,10 +35,11 @@
             <button onClick="update(event)">Update</button>
             <button onClick="deleteThing(event)">Delete</button>
         </form>
-        <!-- textarea to display json data instead of using popup -->
         <textarea id="json-display" rows="20" readonly></textarea>
     </div>
 </div>
+
+<script src="status.js"></script>  <!-- Moved this to the end -->
 
 </body>
 </html>
