@@ -1,25 +1,31 @@
 # Build Stage
 FROM openjdk:8-jdk-alpine as build
 WORKDIR /workspace/app
+
+# Copy Maven wrapper and other necessary files
 COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
-RUN chmod +x ./mvnw
-RUN ./mvnw install -DskipTests
-RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
-# Final Stage
+# Ensure Maven wrapper script is executable
+RUN chmod +x ./mvnw
+
+# Package the application without running tests
+RUN ./mvnw package -DskipTests
+
+# Final Stage - Creating a lean runtime image
 FROM openjdk:8-jdk-alpine
 
 # Set up volumes and arguments
 VOLUME /tmp
 ARG DEPENDENCY=/workspace/app/target/dependency
 
-# Copy dependencies and classes
-COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
-COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
-COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
+# Copy the JAR file built in the previous stage
+COPY --from=build /workspace/app/target/*.jar app.jar
 
-# Entry Point for Starting the Application
-ENTRYPOINT ["java", "-cp", "app:app/lib/*", "com.deanofwalls.CRUD_DEMO.MainApplication"]
+# Expose the port the app runs on
+EXPOSE 8080
+
+# Entry point for running the Spring Boot app
+ENTRYPOINT ["java", "-jar", "/app.jar"]

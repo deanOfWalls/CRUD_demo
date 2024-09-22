@@ -35,9 +35,8 @@ public class PersonService {
 
     public PersonModel update(Long id, PersonModel newPersonData) {
         PersonModel personInDatabase = this.readById(id);
-        personInDatabase.setFirstName(newPersonData.getFirstName());
-        personInDatabase.setLastName(newPersonData.getLastName());
-        personInDatabase.setBirthDate(newPersonData.getBirthDate());
+        personInDatabase.setProductDescription(newPersonData.getProductDescription());
+        personInDatabase.setTimeScanned(newPersonData.getTimeScanned());
         personInDatabase = repository.save(personInDatabase);
         return personInDatabase;
     }

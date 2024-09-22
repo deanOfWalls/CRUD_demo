@@ -18,20 +18,19 @@ public class PersonModel {
     @Id //Denotes primary key for this Entity (can be auto-generated or generated manually by app)
     @GeneratedValue(strategy = GenerationType.IDENTITY) //annotates Id fields, 'IDENTITY' uses Id column
     private Long id;
-    private String firstName;
-    private String lastName;
+    private String productDescription;
     @JsonFormat(pattern = "yyyy-MM-dd") //i added this notation to try to change the format
-    private LocalDate birthDate; //I think the format is: yyyy-MM-ddTHH:mm:ss
+    private LocalDate timeScanned; //I think the format is: yyyy-MM-ddTHH:mm:ss
 
     public PersonModel() {
 
     }
 
-    public PersonModel(Long id, String firstName, String lastName, LocalDate birthDate) {
+    public PersonModel(Long id, String productDescription, LocalDate timeScanned
+    ) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthDate = birthDate;
+        this.productDescription = productDescription;
+        this.timeScanned = timeScanned;
     }
 
     public Long getId() {
@@ -42,28 +41,19 @@ public class PersonModel {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getProductDescription() {
+        return productDescription;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
     }
 
-    public String getLastName() {
-        return lastName;
+    public LocalDate getTimeScanned() {
+        return timeScanned;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setTimeScanned(LocalDate timeScanned) {
+        this.timeScanned = timeScanned;
     }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
 }

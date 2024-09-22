@@ -17,9 +17,8 @@ public class PersonConfig {
     @PostConstruct
     public void setup() {
         PersonModel person1 = new PersonModel();
-        person1.setFirstName("Guy");
-        person1.setLastName("Fieri");
-        person1.setBirthDate(LocalDate.of(1999,10,10));
+        person1.setProductDescription("Presumably some kind of fabric");
+        person1.setTimeScanned(LocalDate.of(2024,10,10, 20:22:22));
 
 
         PersonModel person2 = new PersonModel();
