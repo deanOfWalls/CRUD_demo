@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonService {
@@ -19,36 +20,36 @@ public class PersonService {
     }
 
     public PersonModel create(PersonModel person) {
-        return repository.save(person);
+        PersonModel personCreated = repository.save(person);
+        return personCreated;
     }
 
-    public PersonModel readById(Long id) {
-        return repository.findById(id).get();
+    public PersonModel read(Long id) {
+        Optional<PersonModel> potentialPerson = repository.findById(id);
+        PersonModel person = potentialPerson.get();
+        return person;
+    }
+
+    public PersonModel update(Long id, PersonModel person) {
+        PersonModel personInDataBase = read(id);
+        String newFirstName = person.getFirstName();
+        String newLastName = person.getLastName();
+
+        personInDataBase.setFirstName(newFirstName);
+        personInDataBase.setLastName(newLastName);
+        repository.save(personInDataBase);
+        return personInDataBase;
+    }
+
+    public PersonModel delete(Long id) {
+        PersonModel person = read(id);
+        repository.delete(person);
+        return person;
     }
 
     public List<PersonModel> readAll() {
-        Iterable<PersonModel> allPeople = repository.findAll();
         List<PersonModel> personList = new ArrayList<>();
-        allPeople.forEach(personList::add);
+        repository.findAll().forEach(personList::add);
         return personList;
     }
-
-    public PersonModel update(Long id, PersonModel newPersonData) {
-        PersonModel personInDatabase = this.readById(id);
-        personInDatabase.setProductDescription(newPersonData.getProductDescription());
-        personInDatabase.setTimeScanned(newPersonData.getTimeScanned());
-        personInDatabase = repository.save(personInDatabase);
-        return personInDatabase;
-    }
-
-    public PersonModel deleteById(Long id) {
-        PersonModel personToBeDeleted = this.readById(id);
-        repository.delete(personToBeDeleted);
-        return personToBeDeleted;
-    }
-
-
 }
-
-
-

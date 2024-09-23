@@ -14,7 +14,7 @@ class Person {
 }
 
 function create(event) {
-    event.preventDefault(); //prevent default submission since asynchronous
+    event.preventDefault(); // Prevent default submission since asynchronous
 
     const personIdElement = document.getElementById("person-id");
     const firstNameElement = document.getElementById("first-name");
@@ -25,7 +25,6 @@ function create(event) {
     const firstNameValue = firstNameElement.value;
     const lastNameValue = lastNameElement.value;
     const birthDateValue = birthDateElement.value;
-    const person = new Person(personIdValue, firstNameValue, lastNameValue, birthDateValue);
 
     const personData = JSON.stringify({
         id: personIdValue,
@@ -36,13 +35,11 @@ function create(event) {
 
     $.ajax({
         type: "POST",
-        crossDomain: true,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
         },
-        url: "/create",
+        url: "/person-controller/create",
         data: personData,
         dataType: "JSON",
         success: function (response) {
@@ -60,13 +57,11 @@ async function readAll(event) {
     try {
         const response = await $.ajax({
             type: "GET",
-            crossDomain: true,
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
+                'Content-Type': 'application/json'
             },
-            url: "/readAll",
+            url: "/person-controller/read-all",  // Corrected URL
         });
 
         // Display the JSON data in the textarea
@@ -84,13 +79,11 @@ async function readById(event) {
     try {
         const response = await $.ajax({
             type: "GET",
-            crossDomain: true,
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
+                'Content-Type': 'application/json'
             },
-            url: "/read/" + personIdValue,
+            url: "/person-controller/read/" + personIdValue,
         });
 
         // Display the JSON data in the textarea instead of using stringify popup
@@ -124,13 +117,11 @@ async function update(event) {
     try {
         const response = await $.ajax({
             type: "PUT",
-            crossDomain: true,
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
+                'Content-Type': 'application/json'
             },
-            url: "/update/" + personIdValue,
+            url: "/person-controller/update/" + personIdValue,
             data: JSON.stringify({
                 id: personIdValue,
                 firstName: firstNameValue,
@@ -157,13 +148,11 @@ async function deleteThing(event) {
     try {
         const response = await $.ajax({
             type: "DELETE",
-            crossDomain: true,
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
+                'Content-Type': 'application/json'
             },
-            url: "/delete/" + personIdValue,
+            url: "/person-controller/delete/" + personIdValue,
         });
 
         // Display the JSON data in the textarea instead of using stringify popup
@@ -173,5 +162,29 @@ async function deleteThing(event) {
     }
 }
 
+async function fetchAndUpdateStats() {
+    try {
+        const response = await $.ajax({
+            type: "GET",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url: "/person-controller/stats",
+        });
 
+        // Update the frontend with the stats
+        document.querySelector("#cpuCount .stat-value").textContent = response.cpuCount;
+        document.querySelector("#cpuSpeed .stat-value").textContent = response.cpuSpeed + " MHz";
+        document.querySelector("#jvmMemory .stat-value").textContent = response.jvmMemory;
 
+        // Now that we have fetched the stats, display the stats section
+        document.getElementById('statsSection').style.display = 'block';
+
+    } catch (error) {
+        console.error("Error fetching stats:", error);
+        document.querySelector("#cpuCount .stat-value").textContent = "N/A";
+        document.querySelector("#cpuSpeed .stat-value").textContent = "N/A";
+        document.querySelector("#jvmMemory .stat-value").textContent = "N/A";
+    }
+}
